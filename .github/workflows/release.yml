@@ -44,10 +44,10 @@ jobs:
           retention-days: 90
 
       - name: Create zip archive
-        run: |
-          cd dist
-          zip -r ../release.zip .
-        shell: bash
+        uses: vimtor/action-zip@v1
+        with:
+          files: dist/
+          dest: release-${{ matrix.os }}-v${{ github.ref_name }}.zip
 
       - name: Extract Version Tag
         id: get_version
@@ -86,7 +86,7 @@ jobs:
             See the commits included in this release.
           
           # 4. Upload the built binary as an asset
-          files: release-v${{ steps.get_version.outputs.tag }}.zip
+          files: release-${{ matrix.os }}-v${{ github.ref_name }}.zip
           
           # 5. Generate a discussion
           # Creates a new discussion for the release in the 'Announcements' category
