@@ -1,11 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_run:
-    workflows: ["Node.js CI"]
-    branches: ["main"]
-    types:
-      - completed
   workflow_dispatch:
 
 permissions:
@@ -18,16 +13,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+
+  call-build-workflow:
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+
   deploy:
-    needs: []
+    needs: call-build-workflow
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success')
 
     steps:
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
-      with:
-        enablement: true
 
     - name: Download artifacts from build job
       uses: actions/download-artifact@v4
