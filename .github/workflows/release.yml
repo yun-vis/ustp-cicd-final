@@ -83,7 +83,7 @@ jobs:
             See the commits included in this release.
           
           # 4. Upload the built binary as an asset
-          files: release-${{ matrix.os }}-v${{ github.ref_name }}.zip
+          files: release-${{ matrix.os }}-${{ github.ref_name }}.zip
           
           # 5. Generate a discussion
           # Creates a new discussion for the release in the 'Announcements' category
