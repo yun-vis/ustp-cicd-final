@@ -14,7 +14,8 @@ const __dirname = dirname(__filename);
 const projectRoot = process.env.PROJECT_ROOT || __dirname;
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? "/ustp-cicd-final/" : "/",
+  base: "./",
+  // base: process.env.GITHUB_ACTIONS ? "/ustp-cicd-final/" : "/",
   plugins: [
     react(),
     tailwindcss(),
