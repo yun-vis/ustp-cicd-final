@@ -9,16 +9,11 @@ on:
 
 jobs:
 
-  build-and-release:
+  build:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
-    
-    # Grant necessary permissions for the GITHUB_TOKEN to create the release/tag
-    permissions:
-      contents: write # Required to create the release, tag, and publish notes
-      discussions: write # Required to optionally create a discussion
 
     steps:
 
@@ -36,18 +31,36 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-build-artifact-${{ matrix.os }}
-          path: dist/
-          retention-days: 90
-
       - name: Create zip archive
         shell: pwsh
         run: |
           $zipName = "release-${{ matrix.os }}-${{ github.ref_name }}.zip"
-          Compress-Archive -Path dist/* -DestinationPath $zipName -Force
+          Compress-Archive -Path dist -DestinationPath $zipName -Force
+
+      - name: Upload zip as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.os }}-${{ github.ref_name }}
+          path: release-${{ matrix.os }}-${{ github.ref_name }}.zip
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      discussions: write
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
 
       - name: Extract Version Tag
         id: get_version
@@ -57,18 +70,20 @@ jobs:
           $version = $tag.TrimStart('v')
           Write-Output "tag=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
+      - name: Prepare release files
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path release-artifacts -Recurse -Include "*.zip" | ForEach-Object {
+            Copy-Item $_.FullName -Destination .
+          }
+          Get-ChildItem -Path . -Name "*.zip"
+
       - name: Create Release & Tag
-        uses: softprops/action-gh-release@v2 # A popular, feature-rich action for releases
+        uses: softprops/action-gh-release@v2
         with:
-          # 1. Automatically create a tag
-          tag_name: v${{ steps.get_version.outputs.tag }} # Use the extracted version with 'v' prefix
+          tag_name: v${{ steps.get_version.outputs.tag }}
           name: USTP CI/CD Tetris v${{ steps.get_version.outputs.tag }}
-          
-          # 2. Generate release notes
-          # Compares the current commit to the previous tag/release to generate a changelog
-          generate_release_notes: true 
-          
-          # 3. Add a release note in the repository (This is the Release description itself)
+          generate_release_notes: true
           body: |
             ## Release Notes for v${{ steps.get_version.outputs.tag }}
             
@@ -81,16 +96,7 @@ jobs:
             
             **Full Changelog:**
             See the commits included in this release.
-          
-          # 4. Upload the built binary as an asset
-          files: release-${{ matrix.os }}-${{ github.ref_name }}.zip
-          
-          # 5. Generate a discussion
-          # Creates a new discussion for the release in the 'Announcements' category
-          discussion_category_name: Announcements 
-          
-          # Optional: Make it a draft first if you want to review it
-          # draft: true 
-          
-          # Optional: Set this if this is a pre-release version
-          # prerelease: false
+          files: |
+            release-ubuntu-latest-${{ github.ref_name }}.zip
+            release-windows-latest-${{ github.ref_name }}.zip
+          discussion_category_name: Announcements
