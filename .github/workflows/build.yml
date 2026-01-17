@@ -27,8 +27,15 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Tests # need to run test before build
-      run: npm test # same as npm run test
+    - name: Run tests with coverage
+      run: npm run test:ci -- --coverage
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-${{ matrix.os }}
+        path: coverage/
+        retention-days: 14
 
     - name: Build project
       run: npm run build --if-present
