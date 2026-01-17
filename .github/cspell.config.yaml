@@ -1,0 +1,15 @@
+version: "0.2"
+language: en
+ignorePaths:
+  - node_modules/**
+  - dist/**
+  - .git/**
+  - package-lock.json
+files:
+  - "**/*.md"
+words:
+  - cicd
+  - ustp
+  - yun
+  - nodejs
+  - vscode
