@@ -1,0 +1,24 @@
+name: Spell Check Markdown Files
+
+on:
+  pull_request:
+    # Run on every pull request, regardless of changed files
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install cspell
+        run: npm install -g cspell@6
+
+      - name: Spell check markdown
+        run: cspell --no-progress --no-summary --config .github/cspell.config.yaml "**/*.md"
