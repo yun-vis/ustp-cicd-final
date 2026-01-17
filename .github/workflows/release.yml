@@ -1,4 +1,3 @@
-# Workflow to automatically publish a GitHub Release when a new tag is pushed
 name: Automatic Publish GitHub Release
 
 on:
