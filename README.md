@@ -31,10 +31,12 @@ $ npm run preview
 
 # Status Badges for all Workflows
 
-[![Node.js CI](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml)
+[![Node.js CI](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml) [codecov](https://codecov.io/gh/yun-vis/ustp-cicd-final/branch/main/graph/badge.svg)
 
 [![Deploy to GitHub Pages](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build_page.yml/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build_page.yml)
 
 [![Automatic Publish GitHub Release](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/release.yml/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/release.yml)
 
 [![Dependabot Updates](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/dependabot/dependabot-updates)
+
+[![Spell Check Markdown Files](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/spellcheck.yml/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/spellcheck.yml)
