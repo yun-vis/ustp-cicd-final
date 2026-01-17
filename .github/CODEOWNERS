@@ -1,1 +1,3 @@
 /.github/settings.yml @yun-vis
+/.github/workflows/*.yml @yun-vis
+/.github/workflows/*.yaml @yun-vis
