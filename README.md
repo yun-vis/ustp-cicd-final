@@ -31,7 +31,8 @@ $ npm run preview
 
 # Status Badges for all Workflows
 
-[![Node.js CI](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml) [codecov](https://codecov.io/gh/yun-vis/ustp-cicd-final/branch/main/graph/badge.svg)
+[![Node.js CI](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml) 
+![Coverage](https://codecov.io/gh/yun-vis/ustp-cicd-final/branch/main/graph/badge.svg)
 
 [![Deploy to GitHub Pages](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build_page.yml/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build_page.yml)
 
