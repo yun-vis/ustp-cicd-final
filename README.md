@@ -6,7 +6,7 @@
 Make sure that you have [nodejs](https://nodejs.org/en/download/current) installed.
 
 ```bash
-$ cd TO_THE_SUBFOLDER_THAT_CONTACIN_proxy.js
+$ cd TO_THE_SUBFOLDER_THAT_CONTAIN_proxy.js
 $ node proxy.js
 ```
 
