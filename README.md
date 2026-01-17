@@ -28,3 +28,13 @@ $ npm run build
 # Preview the project
 $ npm run preview
 ```
+
+# Status Badges for all Workflows
+
+[![Node.js CI](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build.yml)
+
+[![Deploy to GitHub Pages](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build_page.yml/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/build_page.yml)
+
+[![Automatic Publish GitHub Release](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/release.yml/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/release.yml)
+
+[![Dependabot Updates](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/yun-vis/ustp-cicd-final/actions/workflows/dependabot/dependabot-updates)
